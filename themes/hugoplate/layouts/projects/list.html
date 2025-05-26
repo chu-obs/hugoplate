@@ -1,0 +1,29 @@
+{{ define "main" }}
+  {{ partial "page-header" . }}
+
+  <section class="section">
+    <div class="container">
+      <!-- 页面描述内容 -->
+      {{ if .Content }}
+        <div class="row justify-center mb-10">
+          <div class="lg:col-10 text-center">
+            <div class="content">
+              {{ .Content }}
+            </div>
+          </div>
+        </div>
+      {{ end }}
+      
+      <!-- project posts -->
+      <div class="row">
+        {{ $paginator:= .Paginate .RegularPages }}
+        {{ range $paginator.Pages }}
+          <div class="md:col-6 lg:col-4 mb-14">
+            {{ partial "components/project-card" . }}
+          </div>
+        {{ end }}
+      </div>
+      {{ partial "components/pagination.html" . }}
+    </div>
+  </section>
+{{ end }}
